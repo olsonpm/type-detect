@@ -1,5 +1,6 @@
 {
   "name": "type-detect",
+  "version": "v4.1.0",
   "description": "Improved typeof detection for node.js and the browser.",
   "keywords": [
     "type",
