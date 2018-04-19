@@ -14,4 +14,8 @@ describeIf(isNode)('Node Specific', () => {
     assert(type(process) === 'process');
   });
 
+  it('Buffer', () => {
+    assert(type(Buffer.alloc(1)) === 'Buffer');
+  });
+
 });

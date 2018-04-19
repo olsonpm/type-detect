@@ -14,6 +14,7 @@ const setExists = typeof Set !== 'undefined';
 const weakMapExists = typeof WeakMap !== 'undefined';
 const weakSetExists = typeof WeakSet !== 'undefined';
 const dataViewExists = typeof DataView !== 'undefined';
+const bufferExists = typeof Buffer !== 'undefined';
 const symbolIteratorExists = symbolExists && typeof Symbol.iterator !== 'undefined';
 const symbolToStringTagExists = symbolExists && typeof Symbol.toStringTag !== 'undefined';
 const setEntriesExists = setExists && typeof Set.prototype.entries === 'function';
@@ -205,6 +206,15 @@ export default function typeDetect(obj) {
         return 'HTMLTableHeaderCellElement';
       }
     }
+  }
+
+  /*
+   * Currently typeDetect(<Buffer instance>) reports 'Uint8Array' which isn't
+   * exactly true as explained here:
+   * https://github.com/chaijs/chai/issues/1028#issuecomment-323626578
+   */
+  if (bufferExists && obj instanceof Buffer) {
+    return 'Buffer';
   }
 
   /* ! Speed optimisation
